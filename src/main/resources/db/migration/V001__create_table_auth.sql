@@ -1,0 +1,6 @@
+CREATE TABLE auth(
+  id UUID PRIMARY KEY,
+  login TEXT NOT NULL,
+  password TEXT NOT NULL,
+  role TEXT NOT NULL
+);

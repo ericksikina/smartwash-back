@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smartwash
+    username: postgres
+    password: 1234
+  flyway:
+    baseline-on-migrate: true
+  jpa:
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: erickduartesikina@gmail.com
+    password: intd ncyo kzwv dsqz
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:my-secret-key}
