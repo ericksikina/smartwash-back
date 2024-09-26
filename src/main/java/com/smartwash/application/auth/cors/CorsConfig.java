@@ -13,8 +13,8 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("/**"); // Permitir a origem específica
+        config.setAllowCredentials(true); // Permitir envio de credenciais
+        config.addAllowedOriginPattern("*"); // Permitir todas as origens
         config.addAllowedHeader("*"); // Permitir todos os cabeçalhos
         config.addAllowedMethod("*"); // Permitir todos os métodos HTTP
         source.registerCorsConfiguration("/**", config); // Aplicar a todos os endpoints
