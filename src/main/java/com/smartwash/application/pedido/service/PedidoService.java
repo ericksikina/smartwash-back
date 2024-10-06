@@ -111,14 +111,14 @@ public class PedidoService {
         this.pedidoRepository.save(pedido);
     }
 
-    public BigDecimal cacularValorTotalPedido(List<PedidoServicoRequest> listaDeServicos){
+    public String cacularValorTotalPedido(List<PedidoServicoRequest> listaDeServicos){
         BigDecimal valorTotal = BigDecimal.ZERO;
         for (PedidoServicoRequest pedidoServico: listaDeServicos) {
             Servico servico = this.buscarServicoPorId(pedidoServico.servico());
             valorTotal = valorTotal.add(servico.getPreco().multiply(BigDecimal.valueOf(pedidoServico.quantidade())));
         }
 
-        return valorTotal;
+        return valorTotal.toString();
     }
 
     public void enviarEmail(UUID idPedido){

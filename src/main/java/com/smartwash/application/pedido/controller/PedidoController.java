@@ -63,7 +63,7 @@ public class PedidoController {
     }
 
     @PostMapping("/calcular-total")
-    public ResponseEntity<BigDecimal> cacularValorTotalPedido(@RequestBody List<PedidoServicoRequest> listaDeServicos){
+    public ResponseEntity<String> cacularValorTotalPedido(@RequestBody List<PedidoServicoRequest> listaDeServicos){
         return ResponseEntity.ok(this.pedidoService.cacularValorTotalPedido(listaDeServicos));
     }
 
