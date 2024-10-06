@@ -89,13 +89,13 @@ public class CompraService {
         this.compraRepository.save(compra);
     }
 
-    public BigDecimal cacularValorTotalCompra(List<CompraProdutoRequest> listaDeCompraProduto){
+    public String cacularValorTotalCompra(List<CompraProdutoRequest> listaDeCompraProduto){
         BigDecimal valorTotal = BigDecimal.ZERO;
         for (CompraProdutoRequest compraProduto: listaDeCompraProduto) {
             valorTotal = valorTotal.add(new BigDecimal(compraProduto.precoUnitario())
                     .multiply(BigDecimal.valueOf(compraProduto.quantidade())));
         }
 
-        return valorTotal;
+        return valorTotal.toString();
     }
 }

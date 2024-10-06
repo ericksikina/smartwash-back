@@ -41,7 +41,7 @@ public class CompraController {
     }
 
     @PostMapping("/calcular-total")
-    public ResponseEntity<BigDecimal> cacularValorTotalPedido(@RequestBody List<CompraProdutoRequest> listaDeProdutos){
+    public ResponseEntity<String> cacularValorTotalPedido(@RequestBody List<CompraProdutoRequest> listaDeProdutos){
         return ResponseEntity.ok(this.compraService.cacularValorTotalCompra(listaDeProdutos));
     }
 }
