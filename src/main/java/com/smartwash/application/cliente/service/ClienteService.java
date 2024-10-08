@@ -34,9 +34,9 @@ public class ClienteService {
 
     @Transactional
     public void cadastrarCliente(ClienteRequest clienteRequest) {
-        this.validarCpfEEmailJaCadastrados(clienteRequest.cpf(), clienteRequest.email());
         Endereco endereco = EnderecoRequestMapper.toEndereco(clienteRequest.endereco(), new Endereco());
         Cliente cliente = ClienteRequestMapper.ClienteRequestToCliente(clienteRequest, new Cliente(), endereco);
+        this.validarCpfEEmailJaCadastrados(clienteRequest.cpf(), clienteRequest.email());
 
         this.clienteRepository.save(cliente);
     }
@@ -44,11 +44,7 @@ public class ClienteService {
     @Transactional
     public void atualizarCliente(UUID id, ClienteRequest clienteRequest) {
         Cliente cliente = this.buscarClientePorId(id);
-
-        if(!clienteRequest.cpf().equals(cliente.getCpf()) ||
-                !clienteRequest.email().equals(cliente.getEmail())) {
-            this.validarCpfEEmailJaCadastrados(clienteRequest.cpf(), clienteRequest.email());
-        }
+        this.validarCpfEEmailJaCadastradosParaAtualizacao(clienteRequest.cpf(), clienteRequest.email(), cliente);
 
         Endereco endereco = EnderecoRequestMapper.toEndereco(clienteRequest.endereco(), cliente.getEndereco());
         ClienteRequestMapper.ClienteRequestToCliente(clienteRequest, cliente, endereco);
@@ -75,6 +71,19 @@ public class ClienteService {
         }
         if (this.emailJaCadastrado(email)){
             throw new BadRequestException("O e-mail " + email + " já está cadastrado no sistema!");
+        }
+    }
+
+    private void validarCpfEEmailJaCadastradosParaAtualizacao(String cpf, String email, Cliente cliente){
+        if (!cliente.getCpf().equals(cpf)){
+            if (this.cpfJaCadastrado(cpf)){
+                throw new BadRequestException("O cpf " + cpf + " já está cadastrado no sistema!");
+            }
+        }
+        if(!email.equals(cliente.getEmail())){
+            if (this.emailJaCadastrado(email)){
+                throw new BadRequestException("O e-mail " + email + " já está cadastrado no sistema!");
+            }
         }
     }
 
