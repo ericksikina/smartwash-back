@@ -13,7 +13,7 @@ public class FuncionarioResponseMapper {
     public static FuncionarioResponse toFuncionarioResponse(final Funcionario funcionario) {
         return new FuncionarioResponse(funcionario.getId(), funcionario.getNome(), funcionario.getCpf(),
                 funcionario.getCelular(), funcionario.getSalario().toString(),
-                DateFormatter.converterLocalDateParaString(funcionario.getDataContratacao()), funcionario.getStatus(),
+                funcionario.getDataContratacao(), funcionario.getStatus(),
                 EnderecoResponseMapper.toEnderecoResponse(funcionario.getEndereco()));
     }
 
